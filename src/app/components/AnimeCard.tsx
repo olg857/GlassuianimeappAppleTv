@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Play, Info, Plus } from 'lucide-react';
 import { Button } from './ui/button';
+import { ExternalLinks } from './ExternalLinks';
 
 interface AnimeCardProps {
   title: string;
@@ -9,9 +10,13 @@ interface AnimeCardProps {
   episodes?: number;
   isLarge?: boolean;
   delay?: number;
+  malId?: string;
+  anilistId?: string;
+  malRating?: string;
+  anilistRating?: string;
 }
 
-export function AnimeCard({ title, image, rating, episodes, isLarge, delay = 0 }: AnimeCardProps) {
+export function AnimeCard({ title, image, rating, episodes, isLarge, delay = 0, malId, anilistId, malRating, anilistRating }: AnimeCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -39,12 +44,21 @@ export function AnimeCard({ title, image, rating, episodes, isLarge, delay = 0 }
         <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl p-4 shadow-2xl">
           <h3 className="text-white font-semibold text-lg mb-2 line-clamp-1">{title}</h3>
           
-          <div className="flex items-center gap-3 mb-4 text-sm text-white/80">
+          <div className="flex items-center gap-3 mb-3 text-sm text-white/80">
             {rating && <span className="px-2 py-1 bg-yellow-500/20 rounded-md">{rating}</span>}
             {episodes && <span>{episodes} Episodes</span>}
           </div>
 
-          <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+            <ExternalLinks
+              malId={malId}
+              anilistId={anilistId}
+              malRating={malRating}
+              anilistRating={anilistRating}
+            />
+          </div>
+
+          <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150 mt-3">
             <Button 
               size="sm" 
               className="flex-1 bg-white hover:bg-white/90 text-black"

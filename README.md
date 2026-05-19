@@ -1,7 +1,7 @@
 
-  # Glass UI Anime App
+  # APPLE TV ANIME TV APP
 
-  This is a code bundle for Glass UI Anime App. The original project is available at https://www.figma.com/design/qt8OZHSjr9G0paYLFsQ0WS/Glass-UI-Anime-App.
+  This is a code bundle for APPLE TV ANIME TV APP. The original project is available at https://www.figma.com/design/qt8OZHSjr9G0paYLFsQ0WS/APPLE-TV-ANIME-TV-APP.
 
   ## Running the code
 

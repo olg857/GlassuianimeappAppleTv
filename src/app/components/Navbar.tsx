@@ -1,10 +1,13 @@
 import { motion } from 'motion/react';
 import { Search, User } from 'lucide-react';
-import { useState } from 'react';
 
-export function Navbar() {
-  const [activeTab, setActiveTab] = useState('Home');
-  const tabs = ['Home', 'Trending', 'New Releases', 'My List', 'Browse'];
+interface NavbarProps {
+  activeTab: string;
+  onTabChange: (tab: string) => void;
+}
+
+export function Navbar({ activeTab, onTabChange }: NavbarProps) {
+  const tabs = ['Home', 'Trending', 'New Releases', 'My List', 'Extensions'];
 
   return (
     <motion.nav 
@@ -28,7 +31,7 @@ export function Navbar() {
               {tabs.map((tab) => (
                 <button
                   key={tab}
-                  onClick={() => setActiveTab(tab)}
+                  onClick={() => onTabChange(tab)}
                   className={`relative px-4 py-2 rounded-lg transition-all ${
                     activeTab === tab
                       ? 'text-white'

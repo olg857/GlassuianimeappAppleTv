@@ -8,6 +8,10 @@ interface Anime {
   image: string;
   rating?: string;
   episodes?: number;
+  malId?: string;
+  anilistId?: string;
+  malRating?: string;
+  anilistRating?: string;
 }
 
 interface CategoryRowProps {
@@ -40,6 +44,10 @@ export function CategoryRow({ title, animes }: CategoryRowProps) {
               image={anime.image}
               rating={anime.rating}
               episodes={anime.episodes}
+              malId={anime.malId}
+              anilistId={anime.anilistId}
+              malRating={anime.malRating}
+              anilistRating={anime.anilistRating}
               delay={index * 0.1}
             />
           ))}
