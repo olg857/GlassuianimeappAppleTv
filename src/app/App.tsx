@@ -3,9 +3,18 @@ import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { CategoryRow } from './components/CategoryRow';
 import { ExtensionSettings } from './components/ExtensionSettings';
+import { WatchTogether } from './components/WatchTogether';
+import { PremiumMembership } from './components/PremiumMembership';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('Home');
+  const [watchTogetherOpen, setWatchTogetherOpen] = useState(false);
+  const [selectedAnime, setSelectedAnime] = useState<string>('');
+
+  const handleWatchTogether = (anime: { title: string }) => {
+    setSelectedAnime(anime.title);
+    setWatchTogetherOpen(true);
+  };
   const trendingAnimes = [
     {
       id: 1,
@@ -17,6 +26,7 @@ export default function App() {
       anilistId: '101922',
       malRating: '8.52',
       anilistRating: '84',
+      debridAvailable: true,
     },
     {
       id: 2,
@@ -28,6 +38,7 @@ export default function App() {
       anilistId: '16498',
       malRating: '8.55',
       anilistRating: '85',
+      debridAvailable: true,
     },
     {
       id: 3,
@@ -39,6 +50,7 @@ export default function App() {
       anilistId: '113415',
       malRating: '8.61',
       anilistRating: '86',
+      debridAvailable: true,
     },
     {
       id: 4,
@@ -50,6 +62,7 @@ export default function App() {
       anilistId: '21459',
       malRating: '7.86',
       anilistRating: '77',
+      debridAvailable: false,
     },
     {
       id: 5,
@@ -61,6 +74,7 @@ export default function App() {
       anilistId: '21',
       malRating: '8.72',
       anilistRating: '87',
+      debridAvailable: true,
     },
   ];
 
@@ -75,6 +89,7 @@ export default function App() {
       anilistId: '127230',
       malRating: '8.66',
       anilistRating: '87',
+      debridAvailable: true,
     },
     {
       id: 7,
@@ -86,6 +101,7 @@ export default function App() {
       anilistId: '140960',
       malRating: '8.52',
       anilistRating: '86',
+      debridAvailable: true,
     },
     {
       id: 8,
@@ -97,6 +113,7 @@ export default function App() {
       anilistId: '1735',
       malRating: '8.27',
       anilistRating: '82',
+      debridAvailable: true,
     },
     {
       id: 9,
@@ -108,6 +125,7 @@ export default function App() {
       anilistId: '20605',
       malRating: '7.79',
       anilistRating: '78',
+      debridAvailable: false,
     },
     {
       id: 10,
@@ -119,6 +137,7 @@ export default function App() {
       anilistId: '1535',
       malRating: '8.62',
       anilistRating: '84',
+      debridAvailable: true,
     },
   ];
 
@@ -133,6 +152,7 @@ export default function App() {
       anilistId: '5114',
       malRating: '9.10',
       anilistRating: '90',
+      debridAvailable: true,
     },
     {
       id: 12,
@@ -144,6 +164,7 @@ export default function App() {
       anilistId: '9253',
       malRating: '9.07',
       anilistRating: '88',
+      debridAvailable: true,
     },
     {
       id: 13,
@@ -155,6 +176,7 @@ export default function App() {
       anilistId: '11061',
       malRating: '9.04',
       anilistRating: '89',
+      debridAvailable: true,
     },
     {
       id: 14,
@@ -166,6 +188,7 @@ export default function App() {
       anilistId: '1',
       malRating: '8.75',
       anilistRating: '86',
+      debridAvailable: true,
     },
     {
       id: 15,
@@ -177,6 +200,7 @@ export default function App() {
       anilistId: '1575',
       malRating: '8.70',
       anilistRating: '85',
+      debridAvailable: true,
     },
   ];
 
@@ -188,6 +212,10 @@ export default function App() {
         <div className="pt-32">
           <ExtensionSettings />
         </div>
+      ) : activeTab === 'Premium' ? (
+        <div className="pt-32">
+          <PremiumMembership />
+        </div>
       ) : (
         <>
           <HeroSection
@@ -196,15 +224,23 @@ export default function App() {
             image="https://images.unsplash.com/photo-1705831156575-a5294d295a31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZW1vbiUyMHNsYXllciUyMGFuaW1lJTIwcG9zdGVyfGVufDF8fHx8MTc3OTE0Mjk0M3ww&ixlib=rb-4.1.0&q=80&w=1080"
             rating="9.2"
             year="2019"
+            onWatchTogether={() => handleWatchTogether({ title: 'Demon Slayer' })}
           />
 
           <div className="relative -mt-32">
-            <CategoryRow title="My List" animes={myList} />
-            <CategoryRow title="Trending Now" animes={trendingAnimes} />
-            <CategoryRow title="New Releases" animes={newReleases} />
+            <CategoryRow title="My List" animes={myList} onWatchTogether={handleWatchTogether} />
+            <CategoryRow title="Trending Now" animes={trendingAnimes} onWatchTogether={handleWatchTogether} />
+            <CategoryRow title="New Releases" animes={newReleases} onWatchTogether={handleWatchTogether} />
           </div>
         </>
       )}
+
+      {/* Watch Together Modal */}
+      <WatchTogether
+        isOpen={watchTogetherOpen}
+        onClose={() => setWatchTogetherOpen(false)}
+        animeTitle={selectedAnime}
+      />
     </div>
   );
 }

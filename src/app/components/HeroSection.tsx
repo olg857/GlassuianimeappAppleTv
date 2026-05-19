@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Play, Info, Volume2, VolumeX } from 'lucide-react';
+import { Play, Info, Volume2, VolumeX, Users } from 'lucide-react';
 import { Button } from './ui/button';
 import { useState } from 'react';
 
@@ -9,9 +9,10 @@ interface HeroSectionProps {
   image: string;
   rating?: string;
   year?: string;
+  onWatchTogether?: () => void;
 }
 
-export function HeroSection({ title, description, image, rating, year }: HeroSectionProps) {
+export function HeroSection({ title, description, image, rating, year, onWatchTogether }: HeroSectionProps) {
   const [isMuted, setIsMuted] = useState(true);
 
   return (
@@ -36,7 +37,7 @@ export function HeroSection({ title, description, image, rating, year }: HeroSec
           className="max-w-2xl"
         >
           {/* Glass Container */}
-          <div className="backdrop-blur-2xl bg-white/5 border border-white/10 rounded-3xl p-8 shadow-2xl">
+          <div className="backdrop-blur-2xl bg-white/5 border border-white/10 rounded-[40px] p-10 shadow-2xl">
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -53,12 +54,12 @@ export function HeroSection({ title, description, image, rating, year }: HeroSec
               className="flex items-center gap-4 mb-6"
             >
               {rating && (
-                <span className="px-3 py-1 bg-yellow-500/30 backdrop-blur-sm border border-yellow-500/50 rounded-lg text-yellow-300 font-semibold">
+                <span className="px-4 py-1.5 bg-yellow-500/30 backdrop-blur-sm border border-yellow-500/50 rounded-full text-yellow-300 font-semibold">
                   ★ {rating}
                 </span>
               )}
               {year && <span className="text-white/80 text-lg">{year}</span>}
-              <span className="px-3 py-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white/90">
+              <span className="px-4 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white/90">
                 HD
               </span>
             </motion.div>
@@ -78,17 +79,26 @@ export function HeroSection({ title, description, image, rating, year }: HeroSec
               transition={{ duration: 0.8, delay: 1 }}
               className="flex gap-4"
             >
-              <Button 
-                size="lg" 
-                className="bg-white hover:bg-white/90 text-black px-8 py-6 text-lg rounded-xl"
+              <Button
+                size="lg"
+                className="bg-white hover:bg-white/90 text-black px-8 py-6 text-lg rounded-full"
               >
                 <Play className="w-5 h-5 mr-2 fill-current" />
                 Play Now
               </Button>
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 variant="outline"
-                className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border-white/30 text-white px-8 py-6 text-lg rounded-xl"
+                onClick={onWatchTogether}
+                className="bg-purple-500/20 hover:bg-purple-500/30 backdrop-blur-sm border-purple-400/30 text-white px-8 py-6 text-lg rounded-full"
+              >
+                <Users className="w-5 h-5 mr-2" />
+                Watch Together
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border-white/30 text-white px-8 py-6 text-lg rounded-full"
               >
                 <Info className="w-5 h-5 mr-2" />
                 More Info

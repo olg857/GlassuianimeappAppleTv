@@ -7,7 +7,7 @@ interface NavbarProps {
 }
 
 export function Navbar({ activeTab, onTabChange }: NavbarProps) {
-  const tabs = ['Home', 'Trending', 'New Releases', 'My List', 'Extensions'];
+  const tabs = ['Home', 'Trending', 'New Releases', 'My List', 'Premium', 'Extensions'];
 
   return (
     <motion.nav 
@@ -16,12 +16,12 @@ export function Navbar({ activeTab, onTabChange }: NavbarProps) {
       transition={{ duration: 0.6 }}
       className="fixed top-0 left-0 right-0 z-50 px-16 py-6"
     >
-      <div className="backdrop-blur-2xl bg-white/5 border border-white/10 rounded-2xl shadow-2xl">
-        <div className="flex items-center justify-between px-6 py-4">
+      <div className="backdrop-blur-2xl bg-white/5 border border-white/10 rounded-[32px] shadow-2xl">
+        <div className="flex items-center justify-between px-8 py-5">
           {/* Logo */}
           <div className="flex items-center gap-8">
-            <h1 className="text-3xl font-bold text-white">
-              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
+            <h1 className="text-3xl font-black text-white tracking-tight">
+              <span className="bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-cyan-500 via-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient bg-[length:200%_auto] rounded-text">
                 AnimeTV
               </span>
             </h1>
@@ -32,7 +32,7 @@ export function Navbar({ activeTab, onTabChange }: NavbarProps) {
                 <button
                   key={tab}
                   onClick={() => onTabChange(tab)}
-                  className={`relative px-4 py-2 rounded-lg transition-all ${
+                  className={`relative px-5 py-2.5 rounded-full transition-all ${
                     activeTab === tab
                       ? 'text-white'
                       : 'text-white/60 hover:text-white/90'
@@ -41,7 +41,7 @@ export function Navbar({ activeTab, onTabChange }: NavbarProps) {
                   {activeTab === tab && (
                     <motion.div
                       layoutId="activeTab"
-                      className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-lg"
+                      className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-full"
                       transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                     />
                   )}
@@ -52,11 +52,11 @@ export function Navbar({ activeTab, onTabChange }: NavbarProps) {
           </div>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-4">
-            <button className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+          <div className="flex items-center gap-3">
+            <button className="p-3 hover:bg-white/10 rounded-full transition-colors">
               <Search className="w-5 h-5 text-white" />
             </button>
-            <button className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+            <button className="p-3 hover:bg-white/10 rounded-full transition-colors">
               <User className="w-5 h-5 text-white" />
             </button>
           </div>

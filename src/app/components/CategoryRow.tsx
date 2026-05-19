@@ -12,14 +12,16 @@ interface Anime {
   anilistId?: string;
   malRating?: string;
   anilistRating?: string;
+  debridAvailable?: boolean;
 }
 
 interface CategoryRowProps {
   title: string;
   animes: Anime[];
+  onWatchTogether?: (anime: Anime) => void;
 }
 
-export function CategoryRow({ title, animes }: CategoryRowProps) {
+export function CategoryRow({ title, animes, onWatchTogether }: CategoryRowProps) {
   return (
     <div className="mb-12">
       <motion.div 
@@ -48,6 +50,8 @@ export function CategoryRow({ title, animes }: CategoryRowProps) {
               anilistId={anime.anilistId}
               malRating={anime.malRating}
               anilistRating={anime.anilistRating}
+              debridAvailable={anime.debridAvailable}
+              onWatchTogether={() => onWatchTogether?.(anime)}
               delay={index * 0.1}
             />
           ))}
