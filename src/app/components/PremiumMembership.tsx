@@ -3,12 +3,25 @@ import { Check, Crown, Sparkles, Zap, Star, Shield, Download, Users } from 'luci
 import { Button } from './ui/button';
 import { useState } from 'react';
 
-export function PremiumMembership() {
+type Tier = 'free' | 'premium' | 'ultimate';
+
+interface PremiumMembershipProps {
+  currentTier?: Tier;
+  busyTier?: string | null;
+  onSelectTier?: (tier: Tier) => void;
+}
+
+export function PremiumMembership({
+  currentTier,
+  busyTier,
+  onSelectTier,
+}: PremiumMembershipProps = {}) {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
 
-  const plans = [
+  const plans: Array<any> = [
     {
       name: 'Free',
+      tier: 'free' as Tier,
       price: { monthly: 0, yearly: 0 },
       icon: Star,
       gradient: 'from-slate-500/20 to-gray-500/20',
@@ -26,6 +39,7 @@ export function PremiumMembership() {
     },
     {
       name: 'Premium',
+      tier: 'premium' as Tier,
       price: { monthly: 9.99, yearly: 99.99 },
       icon: Crown,
       gradient: 'from-purple-500/20 to-pink-500/20',
@@ -45,6 +59,7 @@ export function PremiumMembership() {
     },
     {
       name: 'Ultimate',
+      tier: 'ultimate' as Tier,
       price: { monthly: 14.99, yearly: 149.99 },
       icon: Sparkles,
       gradient: 'from-yellow-500/20 via-orange-500/20 to-red-500/20',
@@ -165,13 +180,23 @@ export function PremiumMembership() {
               </div>
 
               <Button
+                onClick={() => onSelectTier?.(plan.tier)}
+                disabled={
+                  !onSelectTier ||
+                  busyTier === plan.tier ||
+                  currentTier === plan.tier
+                }
                 className={`w-full mb-6 rounded-full py-6 text-lg font-semibold ${
                   plan.recommended
                     ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white'
                     : 'bg-white/10 hover:bg-white/20 border border-white/30 text-white'
                 }`}
               >
-                {plan.cta}
+                {busyTier === plan.tier
+                  ? 'Updating...'
+                  : currentTier === plan.tier
+                  ? 'Current Plan'
+                  : plan.cta}
               </Button>
 
               <div className="space-y-3">
