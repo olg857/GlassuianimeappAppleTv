@@ -237,8 +237,14 @@ export function PremiumMembership() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-12 text-center"
         >
+          <div className="inline-flex items-center gap-3 backdrop-blur-xl bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-400/30 rounded-full px-8 py-4 mb-4">
+            <Sparkles className="w-5 h-5 text-green-400" />
+            <p className="text-white font-semibold text-lg">
+              30-Day Free Trial on All Plans
+            </p>
+          </div>
           <p className="text-white/60 text-sm">
-            All plans include a 7-day free trial. Cancel anytime. No commitments.
+            Cancel anytime. No commitments. No credit card required.
           </p>
         </motion.div>
       </div>
